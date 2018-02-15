@@ -1,0 +1,60 @@
+#!/usr/bin/env php
+
+<?php
+
+require_once __DIR__.'/../vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use Vultr\Commands\AccountInfoCommand;
+use Vultr\Commands\ApiAuthenticateUserCommand;
+use Vultr\Commands\ApplicationListCommand;
+use Vultr\Commands\BackupListCommand;
+use Vultr\Commands\DnsListCommand;
+use Vultr\Commands\DnsRecordsCommand;
+use Vultr\Commands\DnsCreateDomainCommand;
+use Vultr\Commands\IsoImageCreateFromUrlCommand;
+use Vultr\Commands\IsoImageListCommand;
+use Vultr\Commands\OsListCommand;
+use Vultr\Commands\PlansListCommand;
+use Vultr\Commands\PlansVC2ListCommand;
+use Vultr\Commands\PlansVDC2ListCommand;
+use Vultr\Commands\RegionsAvailabilityCommand;
+use Vultr\Commands\RegionsAvailabilityVC2Command;
+use Vultr\Commands\RegionsAvailabilityVDC2Command;
+use Vultr\Commands\RegionsListCommand;
+use Vultr\Commands\ServerCreateCommand;
+use Vultr\Commands\ServerListCommand;
+use Vultr\Commands\ServerRebootCommand;
+use Vultr\Commands\SnapshotCreateCommand;
+use Vultr\Commands\SnapshotDestroyCommand;
+use Vultr\Commands\SnapshotListCommand;
+
+$app = new Application('Vultr client cli','1.0-dev');
+$app->addCommands([
+    new ApplicationListCommand,
+    new BackupListCommand,
+    new ServerListCommand,
+    new ServerCreateCommand,
+    new ServerRebootCommand,
+    new AccountInfoCommand,
+    new ApiAuthenticateUserCommand,
+    new PlansListCommand,
+    new PlansVC2ListCommand,
+    new PlansVDC2ListCommand,
+    new OsListCommand,
+    new RegionsListCommand,
+    new RegionsAvailabilityCommand,
+    new RegionsAvailabilityVC2Command,
+    new RegionsAvailabilityVDC2Command,
+    new DnsListCommand,
+    new DnsRecordsCommand,
+    new DnsCreateDomainCommand,
+    new IsoImageListCommand,
+    new IsoImageCreateFromUrlCommand,
+    new SnapshotListCommand,
+    new SnapshotCreateCommand,
+    new SnapshotDestroyCommand,
+]);
+
+$app->run();
+

@@ -1,0 +1,36 @@
+# Select image from https://hub.docker.com/_/php/
+image: php:7.1
+
+# Select what we should cache
+cache:
+  paths:
+    - vendor/
+
+stages:
+  - test
+  - development
+  - production
+
+before_script:
+ # Install git, the php image doesn't have installed
+  - apt-get update -yqq
+  - apt-get install git -yqq
+
+  # Install mysql driver
+  - docker-php-ext-install pdo_mysql
+
+  # Install composer
+  - curl -sS https://getcomposer.org/installer | php
+
+  #copy our config env
+  - cp src/.env.example src/.env
+
+initial_setup:
+  stage: test
+  script:
+      # Install all project dependencies
+    - php composer.phar install
+      #run unit testing feature
+    - ./vendor/bin/phpunit
+  only: [master]
+
